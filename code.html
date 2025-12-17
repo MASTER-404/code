@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #020617);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 16px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      background: #38bdf8;
+      color: #020617;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0ea5e9;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(14,165,233,0.4);
+    }
+
+    .error {
+      color: #f87171;
+      margin-top: 10px;
+      display: none;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    .content {
+      display: none;
+      text-align: left;
+      margin-top: 15px;
+      background: #020617;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      animation: glowIn 0.6s ease;
+    }
+
+    @keyframes glowIn {
+      from { opacity: 0; box-shadow: 0 0 0 rgba(56,189,248,0); }
+      to { opacity: 1; box-shadow: 0 0 20px rgba(56,189,248,0.35); }
+    }
+
+    .section {
+      margin-bottom: 15px;
+    }
+
+    .section h4 {
+      margin: 0 0 5px;
+      color: #38bdf8;
+    }
+
+    pre {
+      background: #020617;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 0;
+    }
+
+    .copy {
+      margin-top: 6px;
+      background: #22c55e;
+      color: #020617;
+    }
+
+    .copy:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>🔐 Password দিন</h2>
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="checkPass()">Unlock</button>
+    <div class="error" id="error">❌ Password ভুল</div>
+
+    <div class="content" id="content">
+      <div class="section">
+        <h4>📘 Facebook</h4>
+        <pre id="fb">FB-9283-ABCD
+FB-7712-XYZA</pre>
+        <button class="copy" onclick="copyCode('fb')">Copy</button>
+      </div>
+
+      <div class="section">
+        <h4>📧 Gmail</h4>
+        <pre id="gm">GM-4481-QWER
+GM-9021-ASDF</pre>
+        <button class="copy" onclick="copyCode('gm')">Copy</button>
+      </div>
+
+      <div class="section">
+        <h4>📸 Instagram</h4>
+        <pre id="ig">IG-3301-ZXCV</pre>
+        <button class="copy" onclick="copyCode('ig')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = "ahakimbd1";
+
+    function checkPass() {
+      const input = document.getElementById("password").value;
+      const error = document.getElementById("error");
+      const content = document.getElementById("content");
+
+      if (input === correctPassword) {
+        error.style.display = "none";
+        content.style.display = "block";
+      } else {
+        error.style.display = "block";
+        content.style.display = "none";
+      }
+    }
+
+    function copyCode(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+      alert('Copied!');
+    }
+  </script>
+
+</body>
+</html>
